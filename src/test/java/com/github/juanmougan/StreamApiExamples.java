@@ -20,15 +20,15 @@ public class StreamApiExamples {
 			.filter(s -> s.startsWith("c"))
 			.map(String::toUpperCase)
 			.sorted()
-			.forEach(s -> incrementNumberAndAddToList(s, actual));
+			.forEach(s -> actual.add(incrementNumber(s)));
 		
 		List<String> expected = Arrays.asList("C2", "C3");
 		assertThat(actual, is(expected));
 	}
 	
-	private void incrementNumberAndAddToList(String input, List<String> targetList) {
+	private String incrementNumber(String input) {
 		int number = Integer.parseInt(String.valueOf(input.charAt(1)));
-		targetList.add(input.charAt(0) + String.valueOf(number + 1));
+		return input.charAt(0) + String.valueOf(number + 1);
 	}
 
 }
