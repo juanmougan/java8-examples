@@ -1,12 +1,16 @@
 package com.github.juanmougan;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.*;
 
 public class StreamApiExamples {
 
@@ -29,6 +33,30 @@ public class StreamApiExamples {
 	private String incrementNumber(String input) {
 		int number = Integer.parseInt(String.valueOf(input.charAt(1)));
 		return input.charAt(0) + String.valueOf(number + 1);
+	}
+	
+	@Test
+	public void testAnagrams() {
+		String s1, s2;
+		
+		s1 = "TestTest";
+		s2 = "testsest";
+		assertFalse(this.isAnagram(s1, s2));
+	}
+	
+	private boolean isAnagram(String a, String b) {
+        Map<Character, Integer> aFrequencies = initializeAlphabetMap();
+        Map<Character, Integer> bFrequencies = initializeAlphabetMap();
+        a.chars().map(Character::toUpperCase).forEach(c -> aFrequencies.put( ((char) c), ((int) aFrequencies.getOrDefault(((char)c), 0)) + 1 ));
+        b.chars().map(Character::toUpperCase).forEach(c -> bFrequencies.put( ((char) c), ((int) bFrequencies.getOrDefault(((char)c), 0)) + 1 ));
+        return aFrequencies.equals(bFrequencies);
+    }
+	
+	private Map<Character, Integer> initializeAlphabetMap() {
+		Map<Character, Integer> map = new HashMap<>();
+		for (char ch = 'A'; ch <= 'Z'; ++ch)
+			map.put(ch, 0);
+		return map;
 	}
 
 }
