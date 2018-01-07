@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -57,6 +60,17 @@ public class StreamApiExamples {
 		for (char ch = 'A'; ch <= 'Z'; ++ch)
 			map.put(ch, 0);
 		return map;
+	}
+
+	@Test
+	public void testIntStream() {
+		Stream<Integer> intStream = Stream.of(1,2,3,4);
+		Stream<String> strStream = intStream.map(i -> String.valueOf(i) + " ");
+		String out = strStream.collect(Collectors.joining());
+		// Need to reopen Stream
+		intStream = Stream.of(1,2,3,4);
+		System.out.println(out);
+		intStream.forEach(System.out::print);
 	}
 
 }
