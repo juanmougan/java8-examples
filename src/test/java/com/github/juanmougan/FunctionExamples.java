@@ -8,13 +8,14 @@ import org.junit.rules.ExpectedException;
 
 import java.util.function.Function;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FunctionExamples {
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
-    //@Test
-    @Test(expected = CommentedException.class)
+    @Test
     public void testNestedFunctions() {
         // Given
         Person p = Person.builder().firstName("Carlos").lastName("González").dni(-1L).build();
@@ -28,11 +29,10 @@ public class FunctionExamples {
                     }
                     return null;
                 };
-        // When
-        validation.apply(exGenerator);
-        // Then
-        //exceptionRule.expect(CommentedException.class);
-        //exceptionRule.expectMessage("Sorry, we had a problem due to: Exception");
+        // When & Then :)
+        assertThrows(CommentedException.class, () -> {
+            validation.apply(exGenerator);
+        }, "Sorry, we had a problem due to: Exception");
     }
 
 }
