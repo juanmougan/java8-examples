@@ -13,7 +13,8 @@ public class FunctionExamples {
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
-    @Test
+    //@Test
+    @Test(expected = CommentedException.class)
     public void testNestedFunctions() {
         // Given
         Person p = Person.builder().firstName("Carlos").lastName("González").dni(-1L).build();
@@ -23,15 +24,15 @@ public class FunctionExamples {
                 (Function<String, ? extends CommentedException> ex)
                         -> {
                     if (!p.validate()) {
-                        ex.apply("Exception");
+                        throw ex.apply("Exception");
                     }
                     return null;
                 };
         // When
-        exGenerator.apply("por las dudas");
+        validation.apply(exGenerator);
         // Then
-        exceptionRule.expect(CommentedException.class);
-        exceptionRule.expectMessage("Sorry, we had a problem due to: por las dudas");
+        //exceptionRule.expect(CommentedException.class);
+        //exceptionRule.expectMessage("Sorry, we had a problem due to: Exception");
     }
 
 }
