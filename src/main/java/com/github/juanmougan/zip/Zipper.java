@@ -17,9 +17,9 @@ import java.util.zip.ZipFile;
 /**
  * Zip implementation using Java's APIs
  * Big thanks to: <ul>
- *          <li>http://blog.codeleak.pl/2014/06/listing-zip-file-content-java-8.html<li/>
- *          <li>https://stackoverflow.com/a/36890475/3923525<li/>
- *     <ul/>
+ *          <li>http://blog.codeleak.pl/2014/06/listing-zip-file-content-java-8.html</li>
+ *          <li>https://stackoverflow.com/a/36890475/3923525</li>
+ *     </ul>
  *     for the inspiration :)
  */
 public class Zipper {
